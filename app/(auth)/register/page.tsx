@@ -1,7 +1,8 @@
 import SignInForm from '@/components/SignInForm'
+import SignUpForm from '@/components/SignUpForm'
 import React from 'react'
 
-export default function Login() {
+export default function Register() {
     return (
         <div className='w-full h-full'>
 
@@ -13,7 +14,7 @@ export default function Login() {
                 >قم بتسجيل الدخول لمتابعة التسوق</span
                 >
             </div>
-            <SignInForm />
+            <SignUpForm />
 
         </div>
     )

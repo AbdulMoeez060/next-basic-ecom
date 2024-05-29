@@ -13,8 +13,8 @@ export default async function AuthLayout({
     return (
 
         <div className="flex flex-col items-start justify-start w-full">
-            <header className="w-full">
-                <div className="">
+            <header className="w-full flex justify-center">
+                <div className="container">
                     <div className="md:py-6 py-4">
                         <div
                             className="flex justify-center flex-col sm:flex-row gap-4 items-center"
@@ -43,7 +43,15 @@ export default async function AuthLayout({
                     </div>
                 </div>
             </header>
-            {children}
+            <main className="w-full main flex-auto flex justify-center">
+                <div className="container">
+                    <div
+                        className="p-2 sm:p-4 bg-white rounded-lg shadow-4xl sm:max-w-[700px] mx-auto"
+                    >
+                        {children}
+                    </div>
+                </div>
+            </main>
         </div>
 
     );
