@@ -5,4 +5,5 @@ export const URLs = {
 export const endpoints = {
   SIGN_UP: "/user/signup",
   SIGN_IN: "/user/signIn",
+  PRODUCTS: "/product/",
 };

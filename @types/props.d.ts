@@ -3,3 +3,7 @@ interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
   labelClassName?: string;
   labelHtmlFor?: string;
 }
+
+interface ProductCardProps extends Product {
+  index: number;
+}

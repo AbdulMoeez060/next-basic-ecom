@@ -1,11 +1,6 @@
 "use client"
 import { createContext, useState } from "react";
 
-//accessible data
-export interface UserContextData {
-    token: string | null;
-    handleToken: (token: string | null) => void;
-}
 
 //default values
 export const userContextDefault: UserContextData = {

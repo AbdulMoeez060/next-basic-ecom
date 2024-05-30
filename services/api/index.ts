@@ -131,7 +131,7 @@ class HTTPService {
       return response.data;
     } catch (error) {
       console.info(
-        `Error in ${method.toUpperCase()} request to ${endpoint}:`,
+        `Error in ${method.toUpperCase()} request to ${url}:`,
         (error as Error).message
       );
       throw error;
@@ -223,6 +223,9 @@ class HTTPService {
 
   public register<T = any>(payload: object): Promise<T> {
     return this.post<T>(endpoints.SIGN_UP, payload);
+  }
+  public getProducts<T = any>(): Promise<T> {
+    return this.get<T>(endpoints.PRODUCTS);
   }
 }
 
