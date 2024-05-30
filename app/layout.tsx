@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import clsx from "clsx";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,6 +29,7 @@ export default function RootLayout({
         />
       </head>
       <body className={clsx(inter.className, "w-full min-h-screen bg-gray-50")}>{children}
+        <Toaster richColors toastOptions={{ className: "px-4 py-5" }} />
       </body>
     </html>
   );

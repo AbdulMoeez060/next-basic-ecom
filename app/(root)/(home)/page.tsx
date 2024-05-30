@@ -1,13 +1,12 @@
+import Slider from "@/components/Slider";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="w-full main flex-auto">
+    <main className="w-full main flex-auto flex justify-center">
       <div className="container">
         <div className="p-2 sm:p-4 bg-white rounded-lg shadow-4xl">
-          <div className="w-full  bg-gray-100 rounded-lg mb-8">
-            <img src="images/main-slider/01.png" className="w-full aspect-video rounded-lg" alt="" />
-          </div>
+          <Slider />
           <div className="flex items-center justify-between gap-4 mb-4">
             <div className="flex flex-col gap-1 flex-1">
               <label htmlFor="product_query" className="hidden">ابحث عن منتج</label>

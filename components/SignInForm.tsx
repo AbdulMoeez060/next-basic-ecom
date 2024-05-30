@@ -8,8 +8,13 @@ import * as yup from 'yup'
 import InputField from './InputField'
 import SubmitButton from './SubmitButton'
 import Link from 'next/link'
+import { toast } from 'sonner'
+import HTTPService from '@/services/api'
+import { useRouter } from 'next/navigation'
 
 const SignInForm = () => {
+    const router = useRouter()
+
     const form = useForm<yup.InferType<typeof signInValidationSchema>>({
         resolver: yupResolver(signInValidationSchema),
         defaultValues: {
@@ -18,8 +23,21 @@ const SignInForm = () => {
         },
     })
 
-    const onSubmit = (values: yup.InferType<typeof signInValidationSchema>) => {
-        console.log(values);
+    const onSubmit = async (values: yup.InferType<typeof signInValidationSchema>) => {
+        try {
+            const data = await HTTPService.getInstance().login(values);
+            // console.log(data)
+            // This can be stored after encrypting the token
+            document.cookie = `accessToken=${data.token};path=/`
+
+            toast.success("Login Success")
+            router.push('/')
+        } catch (error) {
+            console.log(error)
+
+            toast.error("Something went wrong!")
+        }
+        // console.log(values);
     };
     return (
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col w-full">
@@ -28,8 +46,8 @@ const SignInForm = () => {
                 type="email"
                 id="email"
                 autoComplete="on"
-                placeholder="اسم المستخدم.."
-                label='اسم المستخدم'
+                placeholder="البريد الإلكتروني.."
+                label='البريد الإلكتروني'
                 {...form.register("email")}
 
             />
@@ -50,7 +68,7 @@ const SignInForm = () => {
                     href="/register"
                     className="w-fit text-primary underline p-2 text-md rounded-md"
                 >
-                    نسيت كلمة المرور؟
+                    إنشاء حساب جديد
                 </Link>
             </div>
         </form>

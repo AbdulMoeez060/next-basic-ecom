@@ -8,8 +8,12 @@ import * as yup from 'yup'
 import InputField from './InputField'
 import SubmitButton from './SubmitButton'
 import Link from 'next/link'
+import HTTPService from '@/services/api'
+import { toast } from 'sonner'
+import { useRouter } from 'next/navigation'
 
 const SignUpForm = () => {
+    const router = useRouter()
     const form = useForm<yup.InferType<typeof signUpValidationSchema>>({
         resolver: yupResolver(signUpValidationSchema),
         defaultValues: {
@@ -20,8 +24,20 @@ const SignUpForm = () => {
         },
     })
 
-    const onSubmit = (values: yup.InferType<typeof signUpValidationSchema>) => {
+    const onSubmit = async (values: yup.InferType<typeof signUpValidationSchema>) => {
         console.log(values);
+        try {
+            const data = await HTTPService.getInstance().register(values);
+            console.log("server", data)
+
+            toast.success("Successfully Registered")
+            router.push('/login')
+
+        } catch (error) {
+            console.log(error)
+
+            toast.error("Something went wrong!")
+        }
     };
     return (
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col w-full">
@@ -30,8 +46,8 @@ const SignUpForm = () => {
                 type="text"
                 id="firstName"
                 autoComplete="on"
-                placeholder="اسم المستخدم.."
-                label='اسم المستخدم'
+                placeholder="الاسم الأول.."
+                label="الاسم الأول"
                 {...form.register("firstName")}
 
             />
@@ -39,8 +55,8 @@ const SignUpForm = () => {
                 type="text"
                 id="lastName"
                 autoComplete="on"
-                placeholder="اسم المستخدم.."
-                label='اسم المستخدم'
+                placeholder="الاسم الأخير.."
+                label="الاسم الأخير"
                 {...form.register("lastName")}
 
             />
@@ -48,8 +64,8 @@ const SignUpForm = () => {
                 type="email"
                 id="email"
                 autoComplete="on"
-                placeholder="اسم المستخدم.."
-                label='اسم المستخدم'
+                placeholder="البريد الإلكتروني.."
+                label='البريد الإلكتروني'
                 {...form.register("email")}
 
             />
@@ -64,13 +80,13 @@ const SignUpForm = () => {
             />
             <div className="flex gap-4">
                 <SubmitButton>
-                    دخول
+                    سجل
                 </SubmitButton>
                 <Link
                     href="/login"
                     className="w-fit text-primary underline p-2 text-md rounded-md"
                 >
-                    نسيت كلمة المرور؟
+                    لديك حساب بالفعل
                 </Link>
             </div>
         </form>
