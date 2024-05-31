@@ -21,7 +21,7 @@ const ProductSearch = () => {
 
         router.push(
             url,
-            { shallow: true, scroll: true } as any
+            { scroll: false } as any
         );
         // window.history.replaceState({ ...window.history.state, as: url, url: url }, '', url);
 

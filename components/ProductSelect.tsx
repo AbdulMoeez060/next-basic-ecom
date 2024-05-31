@@ -22,7 +22,7 @@ const ProductSelect = () => {
         const url = queryString ? `/?${queryString}` : "/";
         router.push(
             url,
-            { shallow: true, scroll: true } as any
+            { scroll: false }
         );
         // window.history.replaceState({ ...window.history.state, as: url, url: url }, '', url);
 

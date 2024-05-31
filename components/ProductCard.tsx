@@ -1,7 +1,8 @@
-import { isValidImageSrc } from '@/lib/helpers'
+import { crypt, isValidImageSrc } from '@/lib/helpers'
 import Image from 'next/image'
 import React from 'react'
 import { MotionDiv } from './MotionDiv'
+import Link from 'next/link';
 
 const stagger = 0.25;
 
@@ -10,6 +11,9 @@ const variants = {
     visible: { opacity: 1 },
 };
 const ProductCard: React.FC<ProductCardProps> = ({ categoryId, description, id, imageURL, index, name, price }) => {
+    // as we dont have an endpoint to get a single product
+    let data = JSON.stringify({ description, id, imageURL, name, price })
+    data = crypt("salt", data)
     return (
         <MotionDiv
             variants={variants}
@@ -22,23 +26,23 @@ const ProductCard: React.FC<ProductCardProps> = ({ categoryId, description, id, 
             }}
             viewport={{ amount: 0 }}
             className="rounded-lg border-2 border-gray-50 flex flex-col items-start justify-start md:p-3 p-2 relative">
-            <a href="product-details.html" className="block w-full aspect-4/3 relative mb-4">
+            <Link href={`/products/${id}?item=${data}`} className="block w-full aspect-4/3 relative mb-4">
                 {/* <img src="images/products/02.png" className="w-full  object-cover rounded-lg" alt="product" /> */}
                 <Image
                     src={imageURL && isValidImageSrc(imageURL) ? imageURL : "/assets/slider/01.png"}
                     fill
                     alt='product'
                 />
-            </a>
+            </Link>
             <div className="w-full flex flex-col flex-1 items-start justify-start gap-4">
                 <div className="flex items-center justify-center flex-col gap-1">
-                    <a href="#" className="block w-full text-primary text-center">
+                    <Link href={`/products/${id}?item=${data}`} className="block w-full text-primary text-center">
                         <h2 className="text-sm">{name}</h2>
-                    </a>
+                    </Link>
                     <small className="block text-xs w-full text-center">{description}</small>
                 </div>
                 <div className="flex items-center justify-center flex-wrap gap-2 text-gray-300 w-full">
-                    <a className="text-xs text-gray-500 underline" href="#">تصنيف اول</a><a className="text-xs text-gray-500 underline" href="#">تصنيف ثاني</a>
+                    <p className="text-xs text-gray-500 underline" >تصنيف اول</p><p className="text-xs text-gray-500 underline" >تصنيف ثاني</p>
                 </div>
             </div>
             <div className="flex flex-col sm:flex-row items-center justify-center w-full my-4 gap-0 sm:gap-2">
