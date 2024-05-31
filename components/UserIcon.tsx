@@ -6,16 +6,17 @@ import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
+
     DropdownMenuTrigger,
 } from "@/components/DropDown"
 import { getCookie, removeCookie } from '@/lib/helpers'
 import { UserContext } from '@/context/userContext'
+import { CartContext } from '@/context/cartContext'
 
 
 const UserIcon = () => {
     const { token, handleToken } = useContext(UserContext)
+    const { handleCart } = useContext(CartContext)
     useEffect(() => {
         const token = getCookie("accessToken");
         console.log(token)
@@ -25,6 +26,7 @@ const UserIcon = () => {
     const handleLogout = () => {
         removeCookie("accessToken")
         handleToken(null)
+        handleCart(null)
     }
 
 

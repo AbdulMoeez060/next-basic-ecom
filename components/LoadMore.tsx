@@ -4,7 +4,7 @@ import { useInView } from 'react-intersection-observer'
 import ProductCard from './ProductCard'
 import { useDebounce } from 'use-debounce'
 import { useSearchParams } from 'next/navigation'
-const Loader: React.FC<{ products: Product[] }> = ({ products }) => {
+const LoadMore: React.FC<{ products: Product[] }> = ({ products }) => {
     const { ref, inView } = useInView()
     //this could've been a regular variable if we were using paginated api and callin api on in view
     const [shown, setShown] = useState(4);
@@ -82,4 +82,4 @@ const Loader: React.FC<{ products: Product[] }> = ({ products }) => {
     )
 }
 
-export default Loader
+export default LoadMore

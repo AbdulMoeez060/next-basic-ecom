@@ -33,9 +33,9 @@ const ProductSelect = () => {
             <label htmlFor="priceRange" className="hidden">اختر نطاق السعر</label>
             <select
                 onChange={handlePriceRangeChange}
-
+                defaultValue={"all"}
                 id="priceRange" name="priceRange" className="bg-white border text-md rounded-md focus:ring-secondary-50 focus:border-secondary-50 block w-full px-2 py-1">
-                <option selected value="all">الكل</option>
+                <option value="all">الكل</option>
                 <option value="under_1000">أقل من 1000</option>
                 <option value="1000_2000">1000 - 2000</option>
                 <option value="2000_3000">2000 - 3000</option>

@@ -227,6 +227,22 @@ class HTTPService {
   public getProducts<T = any>(): Promise<T> {
     return this.get<T>(endpoints.PRODUCTS);
   }
+  public editCartItem<T = any>(
+    id: number,
+    payload: object,
+    token: string
+  ): Promise<T> {
+    return this.put<T>(`${endpoints.CART}update/${id}?token=${token}`, payload);
+  }
+  public addCartItem<T = any>(payload: object, token: string): Promise<T> {
+    return this.post<T>(`${endpoints.CART}add?token=${token}`, payload);
+  }
+  public deleteCartItem<T = any>(id: number, token: string): Promise<T> {
+    return this.delete<T>(`${endpoints.CART}delete/${id}?token=${token}`);
+  }
+  public getCart<T = any>(token: string): Promise<T> {
+    return this.get<T>(`${endpoints.CART}?token=${token}`);
+  }
 }
 
 export default HTTPService;

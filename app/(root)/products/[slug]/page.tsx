@@ -1,3 +1,4 @@
+import AddCartButton from '@/components/AddCartButton'
 import { decrypt, isValidImageSrc } from '@/lib/helpers'
 import Image from 'next/image'
 import { redirect } from 'next/navigation'
@@ -57,14 +58,7 @@ const ProductDetails = async ({ searchParams }: {
                                     {data.description}
                                 </p>
                             </article>
-                            <div className="flex items-center justify-center gap-4">
-                                <div className="flex shrink-0 items-center justify-center p-2 border border-1 border-gray-200 rounded-lg">
-                                    <button className="shrink-0 px-2 text-md text-gray-500">+</button>
-                                    <input type="number" value="1" className="w-[50px] flex-1 text-center appearance-none bg-transparent" />
-                                    <button className="shrink-0 px-2 text-md text-gray-500">-</button>
-                                </div>
-                                <button type="button" className="w-full h-[42px] bg-primary text-white flex-1 p-2 text-md rounded-md">إضافة للسلة</button>
-                            </div>
+                            <AddCartButton productId={data.id} hasControls />
                         </div>
                     </div>
                 </div>

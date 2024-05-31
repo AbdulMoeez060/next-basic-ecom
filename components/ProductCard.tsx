@@ -3,6 +3,7 @@ import Image from 'next/image'
 import React from 'react'
 import { MotionDiv } from './MotionDiv'
 import Link from 'next/link';
+import AddCartButton from './AddCartButton';
 
 const stagger = 0.25;
 
@@ -49,7 +50,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ categoryId, description, id, 
                 <span className="font-medium text-md">{price}  SAR</span>
                 <span className="font-medium text-sm line-through text-gray-300">{price} SAR</span>
             </div>
-            <button type="button" className="w-full bg-primary text-white p-2 text-md rounded-md">إضافة للسلة</button>
+            <AddCartButton productId={id} />
         </MotionDiv>)
 }
 

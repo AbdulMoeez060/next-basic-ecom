@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import UserIcon from './UserIcon'
-import { UserContextProvider } from '@/context/userContext'
+import CartIcon from './CartIcon'
 
 const Navbar = () => {
     return (
@@ -21,13 +21,9 @@ const Navbar = () => {
                         </div>
 
                         <div className="flex items-center gap-4">
-                            <UserContextProvider>
 
-                                <UserIcon />
-                            </UserContextProvider>
-                            <Link href="/cart" type="button" className="w-[40px] h-[40px] rounded-full text-center flex items-center justify-center bg-secondary-50 text-primary">
-                                <i className="sicon-shopping-bag"></i>
-                            </Link>
+                            <UserIcon />
+                            <CartIcon />
                         </div>
                     </div>
                 </div>

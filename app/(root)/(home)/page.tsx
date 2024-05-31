@@ -1,4 +1,4 @@
-import Loader from "@/components/Loader";
+import LoadMore from "@/components/LoadMore";
 import ProductCard from "@/components/ProductCard";
 import ProductSearch from "@/components/ProductSearch";
 import ProductSelect from "@/components/ProductSelect";
@@ -26,7 +26,7 @@ export default async function Home({ searchParams }: {
             ))}
 
           </div>
-          <Loader products={data} />
+          <LoadMore products={data} />
         </div>
       </div>
     </main>
