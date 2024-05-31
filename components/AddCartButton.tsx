@@ -6,7 +6,7 @@ import React, { useContext, useState } from 'react'
 import { toast } from 'sonner'
 
 
-const AddCartButton: React.FC<{ productId: number, hasControls?: boolean }> = ({ productId, hasControls = false }) => {
+const AddCartButton: React.FC<AddCartProps> = ({ productId, hasControls = false }) => {
     const [quantity, setQuantity] = useState(1)
     const { token } = useContext(UserContext)
     const { cart, handleCart } = useContext(CartContext)

@@ -5,7 +5,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { toast } from 'sonner'
 import { useDebounce } from 'use-debounce'
 
-const RemoveCartButton: React.FC<{ itemQuantity: number, id: number, productId: number }> = ({ itemQuantity, id, productId }) => {
+const RemoveCartButton: React.FC<RemoveCartProps> = ({ itemQuantity, id, productId }) => {
     const [quantity, setQuantity] = useState(itemQuantity)
     const { token } = useContext(UserContext)
     const { cart, handleCart } = useContext(CartContext)
