@@ -1,30 +1,22 @@
 'use client'
-import { useRouter, useSearchParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import { FilterContext } from '@/context/filterContext';
+import React, { useContext, useEffect, useState } from 'react';
 import { useDebounce } from 'use-debounce';
 
 const ProductSelect = () => {
-
+    //we can use the filters state from context directly in place of this use State but i have added debounce to imitate real scenaria
     const [priceRange, setPriceRange] = useState('all');
-    const router = useRouter()
-    const searchParams = useSearchParams()
-    const search = searchParams.get('search')
     const [pricing] = useDebounce(priceRange, 400)
+    const { handleFilters } = useContext(FilterContext)
+
+
+
     const handlePriceRangeChange = (event: any) => {
         setPriceRange(event.target.value);
     };
 
     useEffect(() => {
-        const searchQuery = search ? `search=${search}` : "";
-        const rangeQuery = pricing !== 'all' ? `range=${pricing}` : "";
-
-        const queryString = [rangeQuery, searchQuery].filter(Boolean).join("&");
-        const url = queryString ? `/?${queryString}` : "/";
-        router.push(
-            url,
-            { scroll: false }
-        );
-        // window.history.replaceState({ ...window.history.state, as: url, url: url }, '', url);
+        handleFilters({ range: pricing === "all" ? null : pricing }) // Update filters with the debounced query
 
     }, [pricing])
 

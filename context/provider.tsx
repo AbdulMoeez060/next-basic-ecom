@@ -1,4 +1,5 @@
 import { CartContextProvider } from "./cartContext";
+import { FilterContextProvider } from "./filterContext";
 import { UserContextProvider } from "./userContext";
 
 export const AppContextProvider = ({
@@ -9,7 +10,9 @@ export const AppContextProvider = ({
     return (
         <UserContextProvider>
             <CartContextProvider>
-                {children}
+                <FilterContextProvider>
+                    {children}
+                </FilterContextProvider>
             </CartContextProvider>
         </UserContextProvider>
     );

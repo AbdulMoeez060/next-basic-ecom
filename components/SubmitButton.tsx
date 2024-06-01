@@ -1,13 +1,17 @@
 import React from 'react'
 
-const SubmitButton: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement>> = (...props) => {
+
+
+const SubmitButton: React.FC<SubmitButtonProps> = ({ loading, ...props }) => {
     return (
         <button
-            className="w-full bg-primary text-secondary flex-1 p-2 text-md rounded-md"
+            className="w-full flex items-center justify-center gap-3 bg-primary text-secondary flex-1 p-2 text-md rounded-md hover:brightness-75"
             {...props}
             type="submit"
         >
             دخول
+            {loading && <div className="loader_simple"></div>}
+
         </button>)
 }
 

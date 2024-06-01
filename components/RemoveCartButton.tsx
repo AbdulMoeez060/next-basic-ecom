@@ -82,7 +82,7 @@ const RemoveCartButton: React.FC<RemoveCartProps> = ({ itemQuantity, id, product
         <div className="flex items-center justify-center gap-4">
             <div className="flex shrink-0 items-center justify-center p-2 border border-1 border-gray-200 rounded-lg">
                 <button
-                    className="shrink-0 px-2 text-md text-gray-500"
+                    className="shrink-0 px-2 text-md text-gray-500 hover:text-gray-300"
                     onClick={incrementQuantity}
                 >
                     +
@@ -94,13 +94,14 @@ const RemoveCartButton: React.FC<RemoveCartProps> = ({ itemQuantity, id, product
                     className="w-[50px] flex-1 text-center appearance-none bg-transparent"
                 />
                 <button
-                    className="shrink-0 px-2 text-md text-gray-500"
+                    className="shrink-0 px-2 text-md text-gray-500 hover:text-gray-300"
                     onClick={decrementQuantity}
+
                 >
                     -
                 </button>
             </div>
-            <button disabled={loading} onClick={deleteCart} type="button" className="w-[28px] h-[28px] shrink-0 flex items-center justify-center text-xs border border-red-500 text-red-500 rounded-full p-1">
+            <button disabled={loading} onClick={deleteCart} type="button" className="w-[28px] h-[28px] shrink-0 flex items-center justify-center text-xs border border-red-500 text-red-500 rounded-full p-1 hover:brightness-75">
                 <i className="sicon-trash"></i>
             </button>
         </div>)

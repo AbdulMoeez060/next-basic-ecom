@@ -2,7 +2,7 @@
 "use client"
 import { signInValidationSchema } from '@/constants/validationSchemas'
 import { yupResolver } from '@hookform/resolvers/yup'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import InputField from './InputField'
@@ -15,6 +15,7 @@ import { UserContext } from '@/context/userContext'
 
 const SignInForm = () => {
     const router = useRouter()
+    const [loading, setLoading] = useState(false)
 
     const form = useForm<yup.InferType<typeof signInValidationSchema>>({
         resolver: yupResolver(signInValidationSchema),
@@ -25,6 +26,7 @@ const SignInForm = () => {
     })
 
     const onSubmit = async (values: yup.InferType<typeof signInValidationSchema>) => {
+        setLoading(true)
         try {
             const data = await HTTPService.getInstance().login(values);
             // console.log(data)
@@ -39,6 +41,7 @@ const SignInForm = () => {
             toast.error("Something went wrong!")
         }
         // console.log(values);
+        setLoading(false)
     };
     return (
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col w-full">
@@ -50,6 +53,7 @@ const SignInForm = () => {
                 placeholder="البريد الإلكتروني.."
                 label='البريد الإلكتروني'
                 {...form.register("email")}
+                error={form.formState.errors?.email?.message}
 
             />
 
@@ -60,14 +64,15 @@ const SignInForm = () => {
                 placeholder="كلمة المرور.."
                 label='كلمة المرور'
                 {...form.register("password")}
+                error={form.formState.errors?.password?.message}
             />
             <div className="flex gap-4">
-                <SubmitButton>
+                <SubmitButton disabled={loading} loading={loading}>
                     دخول
                 </SubmitButton>
                 <Link
                     href="/register"
-                    className="w-fit text-primary underline p-2 text-md rounded-md"
+                    className="w-fit text-primary underline p-2 text-md rounded-md hover:bg-opacity-25"
                 >
                     إنشاء حساب جديد
                 </Link>

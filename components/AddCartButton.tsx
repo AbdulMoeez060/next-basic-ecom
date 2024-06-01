@@ -68,7 +68,7 @@ const AddCartButton: React.FC<AddCartProps> = ({ productId, hasControls = false 
             <div className="flex items-center justify-center gap-4">
                 <div className="flex shrink-0 items-center justify-center p-2 border border-1 border-gray-200 rounded-lg">
                     <button
-                        className="shrink-0 px-2 text-md text-gray-500"
+                        className="shrink-0 px-2 text-md text-gray-500 hover:text-gray-300"
                         onClick={incrementQuantity}
                     >
                         +
@@ -80,21 +80,25 @@ const AddCartButton: React.FC<AddCartProps> = ({ productId, hasControls = false 
                         className="w-[50px] flex-1 text-center appearance-none bg-transparent"
                     />
                     <button
-                        className="shrink-0 px-2 text-md text-gray-500"
+                        className="shrink-0 px-2 text-md text-gray-500 hover:text-gray-300"
                         onClick={decrementQuantity}
                     >
                         -
                     </button>
                 </div>
-                <button disabled={loading} onClick={addToCart} type="button" className="w-full h-[42px] bg-primary text-white flex-1 p-2 text-md rounded-md">
+                <button disabled={loading} onClick={addToCart} type="button" className="w-full h-[42px] flex justify-center gap-3 items-center bg-primary text-white flex-1 p-2 text-md rounded-md hover:brightness-75">
                     إضافة للسلة
+                    {loading && <div className='loader_simple' />}
                 </button>
             </div>
         )
 
     }
     return (
-        <button disabled={loading} type="button" onClick={addToCart} className="w-full bg-primary text-white p-2 text-md rounded-md">إضافة للسلة</button>
+        <button disabled={loading} type="button" onClick={addToCart} className="w-full bg-primary flex justify-center gap-3 text-white p-2 text-md rounded-md hover:brightness-75">
+            إضافة للسلة
+            {loading && <div className='loader_small' />}
+        </button>
 
     )
 }

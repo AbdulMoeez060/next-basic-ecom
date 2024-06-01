@@ -1,19 +1,17 @@
 'use client'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useContext, useEffect, useMemo, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import ProductCard from './ProductCard'
 import { useDebounce } from 'use-debounce'
 import { useSearchParams } from 'next/navigation'
+import { FilterContext } from '@/context/filterContext'
 const LoadMore: React.FC<LoadMoreProps> = ({ products }) => {
     const { ref, inView } = useInView()
     //this could've been a regular variable if we were using paginated api and callin api on in view
     const [shown, setShown] = useState(4);
     const [isInView] = useDebounce(inView, 600)
     const [toShow] = useDebounce(shown, 600)
-    const searchParams = useSearchParams()
-    const search = searchParams.get("search")
-    const range = searchParams.get("range")
-
+    const { filters: { range, search } } = useContext(FilterContext)
     const getFilteredProducts = () => {
         let filteredProducts = products
 
@@ -68,7 +66,7 @@ const LoadMore: React.FC<LoadMoreProps> = ({ products }) => {
                 ))}
 
             </div> : (
-                <div className='w-full text-center text-lg font-medium'>
+                <div className='w-full text-center text-lg font-medium pb-10'>
                     <p>No Products Found</p>
                 </div>
             )}

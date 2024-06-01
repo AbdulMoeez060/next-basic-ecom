@@ -25,6 +25,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ categoryId, description, id, 
                 ease: "easeInOut",
                 duration: 0.5,
             }}
+            whileHover={{ scale: 1.02, transition: { type: "spring", stiffness: 400, damping: 17, duration: 0.3 } }}
             viewport={{ amount: 0 }}
             className="rounded-lg border-2 border-gray-50 flex flex-col items-start justify-start md:p-3 p-2 relative">
             <Link href={`/products/${id}?item=${data}`} className="block w-full aspect-4/3 relative mb-4">

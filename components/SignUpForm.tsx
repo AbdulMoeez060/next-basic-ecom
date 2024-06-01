@@ -2,7 +2,7 @@
 "use client"
 import { signUpValidationSchema } from '@/constants/validationSchemas'
 import { yupResolver } from '@hookform/resolvers/yup'
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import InputField from './InputField'
@@ -13,6 +13,7 @@ import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
 
 const SignUpForm = () => {
+    const [loading, setLoading] = useState(false)
     const router = useRouter()
     const form = useForm<yup.InferType<typeof signUpValidationSchema>>({
         resolver: yupResolver(signUpValidationSchema),
@@ -25,10 +26,9 @@ const SignUpForm = () => {
     })
 
     const onSubmit = async (values: yup.InferType<typeof signUpValidationSchema>) => {
-        console.log(values);
+        setLoading(true)
         try {
             const data = await HTTPService.getInstance().register(values);
-            console.log("server", data)
 
             toast.success("Successfully Registered")
             router.push('/login')
@@ -38,9 +38,10 @@ const SignUpForm = () => {
 
             toast.error("Something went wrong!")
         }
+        setLoading(false)
     };
     return (
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col w-full">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col w-full transition-all ease-in-out duration-300">
 
             <InputField
                 type="text"
@@ -49,6 +50,7 @@ const SignUpForm = () => {
                 placeholder="الاسم الأول.."
                 label="الاسم الأول"
                 {...form.register("firstName")}
+                error={form.formState.errors?.firstName?.message}
 
             />
             <InputField
@@ -58,7 +60,7 @@ const SignUpForm = () => {
                 placeholder="الاسم الأخير.."
                 label="الاسم الأخير"
                 {...form.register("lastName")}
-
+                error={form.formState.errors?.lastName?.message}
             />
             <InputField
                 type="email"
@@ -67,7 +69,7 @@ const SignUpForm = () => {
                 placeholder="البريد الإلكتروني.."
                 label='البريد الإلكتروني'
                 {...form.register("email")}
-
+                error={form.formState.errors?.email?.message}
             />
 
             <InputField
@@ -77,9 +79,10 @@ const SignUpForm = () => {
                 placeholder="كلمة المرور.."
                 label='كلمة المرور'
                 {...form.register("password")}
+                error={form.formState.errors?.password?.message}
             />
             <div className="flex gap-4">
-                <SubmitButton>
+                <SubmitButton disabled={loading} loading={loading}>
                     سجل
                 </SubmitButton>
                 <Link
