@@ -47,7 +47,7 @@ const SignInForm = () => {
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col w-full">
 
             <InputField
-                type="email"
+                type="text"
                 id="email"
                 autoComplete="on"
                 placeholder="البريد الإلكتروني.."

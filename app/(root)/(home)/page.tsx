@@ -1,14 +1,11 @@
-import LoadMore from "@/components/LoadMore";
-import ProductCard from "@/components/ProductCard";
+import { getProducts } from "@/app/action";
 import ProductSearch from "@/components/ProductSearch";
 import ProductSelect from "@/components/ProductSelect";
 import ProductsList from "@/components/ProductsList";
 import Slider from "@/components/Slider";
-import HTTPService from "@/services/api";
 
 export default async function Home() {
-
-  const data: Product[] = await HTTPService.getInstance().getProducts()
+  const data = await getProducts()
   return (
     <main className="w-full main flex-auto flex justify-center">
       <div className="container">

@@ -63,7 +63,7 @@ const SignUpForm = () => {
                 error={form.formState.errors?.lastName?.message}
             />
             <InputField
-                type="email"
+                type="text"
                 id="email"
                 autoComplete="on"
                 placeholder="البريد الإلكتروني.."

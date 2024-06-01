@@ -27,4 +27,5 @@ interface RemoveCartProps {
 interface SubmitButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean;
+  children?: React.ReactNode;
 }

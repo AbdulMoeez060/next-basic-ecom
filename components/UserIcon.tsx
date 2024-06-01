@@ -45,7 +45,7 @@ const UserIcon = () => {
                 <i className="sicon-user"></i>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-                <DropdownMenuItem className='hover:bg-grayer-50' onClick={handleLogout}>Logout</DropdownMenuItem>
+                <DropdownMenuItem className='hover:bg-grayer-50 cursor-pointer' onClick={handleLogout}>Logout</DropdownMenuItem>
 
 
             </DropdownMenuContent>
